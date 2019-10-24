@@ -1,0 +1,9 @@
+version: 1
+timezone: 'America/Los_Angeles'
+sources:
+  - id: 1
+    name: Test Source
+    url: http://streams.c895.org/live.m3u  # support public radio!
+    format: mp3
+    start_time_cron: "*/2 * * * *"
+    duration_minutes: 1
