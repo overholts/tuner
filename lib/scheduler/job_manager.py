@@ -1,7 +1,7 @@
 import logging
 
 from apscheduler.executors.pool import ProcessPoolExecutor
-from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from lib.scheduler.job import Job
@@ -12,11 +12,12 @@ logger = logging.getLogger("JobManager")
 class JobManager:
     def __init__(self, timezone):
         job_stores = {
-            "default": SQLAlchemyJobStore(url="sqlite:///database/jobs.sqlite")
+            # Use our own persistence for jobs since we want to store additional metadata
+            "default": MemoryJobStore()
         }
 
         executors = {
-            # TODO validate configured schedules to enforce this limit up front
+            # TODO Set this dynamically
             "default": ProcessPoolExecutor(4)
         }
 

@@ -136,10 +136,6 @@ RUN mkdir /downloads \
     && mkdir /database \
     && mkdir /configuration
 
-# create container-local job database
-# user should mount a volume to overwrite this if durability is desired
-RUN /usr/bin/sqlite3 /database/jobs.sqlite
-
 COPY lib /application/lib
 
 ENTRYPOINT ["/sbin/tini", "--", "python", "/application/lib/main.py"]
