@@ -9,7 +9,7 @@ from lib.entities import Config, Source
 
 def load_from_yaml(file: Path):
     sources = []
-    with open(file, "r") as config_file:
+    with open(str(file.absolute()), "r") as config_file:
         raw_config = yaml.full_load(config_file.read())
         for index, source in enumerate(raw_config["sources"]):
             sources.append(
