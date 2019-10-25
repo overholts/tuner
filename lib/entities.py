@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import timedelta
 from typing import List
 
 
@@ -9,7 +10,7 @@ class Source:
     url: str
     audio_format: str
     start_time_cron: str
-    duration_minutes: str
+    duration: timedelta
 
 
 @dataclass

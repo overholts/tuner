@@ -9,11 +9,11 @@ logger = logging.getLogger("RecordingJob")
 class RecordingJob(CronJob):
     def __init__(self, definition: Source):
         super().__init__(definition.id, definition.start_time_cron)
-        self._duration_minutes = definition.duration_minutes
+        self._duration = definition.duration
         self._url = definition.url
 
     def run(self):
-        logger.info(f"Recording for {self._duration_minutes} minutes")
+        logger.info(f"Recording for {self._duration}")
 
         # TODO record from audio stream to configured destination
 

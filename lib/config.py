@@ -1,4 +1,5 @@
 import sys
+from datetime import timedelta
 from pathlib import Path
 
 import yaml
@@ -19,7 +20,7 @@ def load_from_yaml(file: Path):
                     url=source["url"],
                     audio_format=source["format"],
                     start_time_cron=source["start_time_cron"],
-                    duration_minutes=source["duration_minutes"],
+                    duration=timedelta(minutes=source["duration_minutes"]),
                 )
             )
 
