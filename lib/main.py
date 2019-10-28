@@ -42,7 +42,22 @@ def parse_args(argv):
         default=Path("/downloads"),
         help=textwrap.dedent(
             """\
-            Location to download raw audio files to"""
+            Location to download raw audio files to."""
+        ),
+    )
+
+    parser.add_argument(
+        "-o",
+        "--processed-dir",
+        metavar="processed-dir",
+        type=Path,
+        required=False,
+        default=Path("/processed"),
+        help=textwrap.dedent(
+            """\
+            Location to stage post-processed output files in. Staging them
+            ensures that modifications of output media library directories
+            are as transactional as possible."""
         ),
     )
 
@@ -95,7 +110,9 @@ def main(argv=None):
 
     # Create jobs for each source
     for source in config.sources:
-        job_manager.register(RecordingJob(source, args.download_dir))
+        job_manager.register(
+            RecordingJob(source, args.download_dir, args.processed_dir)
+        )
 
     # Begin execution of jobs
     job_manager.run()

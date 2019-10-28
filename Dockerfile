@@ -133,6 +133,7 @@ ENV TZ UTC
 ENV PYTHONPATH /application
 
 RUN mkdir /downloads \
+    && mkdir /processed \
     && mkdir /database \
     && mkdir /configuration
 
