@@ -9,6 +9,7 @@ dependencies:
   - autopep8
   - apscheduler
   - sqlalchemy
+  - inflection
   - black
   - pre-commit
 prefix: /Users/over/anaconda3/envs/tuner

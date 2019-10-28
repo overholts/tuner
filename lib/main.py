@@ -34,6 +34,19 @@ def parse_args(argv):
     )
 
     parser.add_argument(
+        "-d",
+        "--download-dir",
+        metavar="download-dir",
+        type=Path,
+        required=False,
+        default=Path("/downloads"),
+        help=textwrap.dedent(
+            """\
+            Location to download raw audio files to"""
+        ),
+    )
+
+    parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -73,7 +86,7 @@ def main(argv=None):
 
     logger.info("Running with args:")
     for arg in vars(args):
-        logger.debug(f"   {arg}:\t{getattr(args, arg)}")
+        logger.info(f"   {arg}:\t{getattr(args, arg)}")
 
     logger.debug(f"Loading config from {args.config}")
     config = load_from_yaml(args.config)
@@ -82,7 +95,7 @@ def main(argv=None):
 
     # Create jobs for each source
     for source in config.sources:
-        job_manager.register(RecordingJob(source))
+        job_manager.register(RecordingJob(source, args.download_dir))
 
     # Begin execution of jobs
     job_manager.run()

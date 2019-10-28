@@ -114,7 +114,7 @@ RUN set -ex; \
 	rm -f get-pip.py
 
 # install modules here while we still have gcc, etc.
-RUN pip install PyYAML requests apscheduler SQLAlchemy
+RUN pip install PyYAML requests apscheduler SQLAlchemy inflection
 
 RUN apk del .build-deps \
 	\
