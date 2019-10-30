@@ -30,7 +30,8 @@ class MP3Recorder(Recorder):
         )
 
         stream_url = self._get_stream_url()
-        logger.debug("Recording from {} to {}".format(stream_url, output_file))
+        logger.info(f"Recording for {self._duration} from {stream_url}")
+        logger.debug(f"Recording to {output_file}")
 
         with requests.get(stream_url, stream=True) as res:
             res.raise_for_status()
@@ -41,7 +42,7 @@ class MP3Recorder(Recorder):
                         logger.debug("Recording duration reached, closing stream.")
                         break
 
-        logger.info("Done recording to {}".format(output_file))
+        logger.info(f"Done recording to {output_file}")
         return output_file
 
     def _get_stream_url(self):

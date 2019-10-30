@@ -13,6 +13,7 @@ class FFMpegFileProcessor(MetadataFileProcessor):
         super().__init__(definition, processed_dir)
 
     def apply(self, input_file: Path) -> Path:
+        logger.info(f"Processing file {input_file}")
         metadata = []
         for key, value in self._get_metadata_tags().items():
             metadata.extend(["-metadata", f"{key}={value}"])
@@ -34,4 +35,5 @@ class FFMpegFileProcessor(MetadataFileProcessor):
         logger.debug("Executing: '{}'".format(" ".join(command)))
         subprocess.check_output(command)
 
+        logger.info(f"Processed output file {output_file}")
         return output_file

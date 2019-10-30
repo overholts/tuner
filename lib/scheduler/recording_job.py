@@ -27,9 +27,8 @@ class RecordingJob(CronJob):
         self._file_processor = FFMpegFileProcessor(definition, processed_dir)
 
     def run(self):
-        logger.info(f"Recording for {self._duration}")
+        logger.info(f"Running recording job with id {self.id}")
         downloaded_file = self._recorder.record()
-        logger.info(f"Done recording")
 
         self._file_processor.apply(downloaded_file)
         # TODO store into media library
