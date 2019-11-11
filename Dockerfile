@@ -128,8 +128,6 @@ RUN apk del .build-deps \
 	\
 	&& python3 --version
 
-ENV TZ UTC
-
 ENV PYTHONPATH /application
 
 RUN mkdir /downloads \

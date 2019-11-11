@@ -1,3 +1,4 @@
+import os
 import sys
 from datetime import timedelta
 from pathlib import Path
@@ -24,7 +25,11 @@ def load_from_yaml(file: Path):
                 )
             )
 
-        tz = timezone(raw_config["timezone"])
+        if raw_config["timezone"] and raw_config["timezone"].strip():
+            tz = timezone(raw_config["timezone"])
+        else:
+            # This is required to be set. See env_validator.py
+            tz = timezone(os.environ["TZ"])
 
     return Config(timezone=tz, sources=sources)
 
