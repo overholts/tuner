@@ -7,7 +7,7 @@ from pathlib import Path
 
 from lib.config import load_from_yaml
 from lib.daemon.process_manager import ProcessManager
-from lib.env_validator import validate_env
+from lib.environment import Environment
 from lib.scheduler.job_manager import JobManager
 from lib.scheduler.recording_job import RecordingJob
 
@@ -104,13 +104,12 @@ def main(argv=None):
     for arg in vars(args):
         logger.info(f"   {arg}:\t{getattr(args, arg)}")
 
-    if not validate_env():
-        return 1
+    env = Environment()
 
     logger.debug(f"Loading config from {args.config}")
-    config = load_from_yaml(args.config)
+    config = load_from_yaml(args.config, env)
 
-    job_manager = JobManager(config.timezone)
+    job_manager = JobManager(env.timezone)
 
     # Create jobs for each source
     for source in config.sources:

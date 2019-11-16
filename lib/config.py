@@ -7,9 +7,10 @@ import yaml
 from pytz import timezone
 
 from lib.entities import Config, Source
+from lib.environment import Environment
 
 
-def load_from_yaml(file: Path):
+def load_from_yaml(file: Path, env: Environment):
     sources = []
     with open(str(file.absolute()), "r") as config_file:
         raw_config = yaml.full_load(config_file.read())
@@ -28,8 +29,7 @@ def load_from_yaml(file: Path):
         if raw_config["timezone"] and raw_config["timezone"].strip():
             tz = timezone(raw_config["timezone"])
         else:
-            # This is required to be set. See env_validator.py
-            tz = timezone(os.environ["TZ"])
+            tz = env.timezone
 
     return Config(timezone=tz, sources=sources)
 
