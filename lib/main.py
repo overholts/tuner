@@ -107,7 +107,7 @@ def main(argv=None):
     env = Environment()
 
     logger.debug(f"Loading config from {args.config}")
-    config = load_from_yaml(args.config, env)
+    config = load_from_yaml(args.config)
 
     job_manager = JobManager(env.timezone)
 

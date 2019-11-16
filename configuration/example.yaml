@@ -1,10 +1,6 @@
 # Config schema version
 version: 1
 
-# Optional setting for the timezone that cron expressions below are relative to.
-# If not specified, the host timezone ($TZ) provided at startup will be used.
-timezone: 'America/Los_Angeles'
-
 # Recording sources
 sources:
   - id: 1

@@ -15,8 +15,4 @@ class Source:
 
 @dataclass
 class Config:
-    # When the user's time zone is not the same as the server where they run
-    # the application, allow them to specify a time zone in the configuration
-    # so they may specify show schedules in their local time.
-    timezone: tzinfo
     sources: List[Source]

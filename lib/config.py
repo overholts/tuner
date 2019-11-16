@@ -10,7 +10,7 @@ from lib.entities import Config, Source
 from lib.environment import Environment
 
 
-def load_from_yaml(file: Path, env: Environment):
+def load_from_yaml(file: Path):
     sources = []
     with open(str(file.absolute()), "r") as config_file:
         raw_config = yaml.full_load(config_file.read())
@@ -26,12 +26,7 @@ def load_from_yaml(file: Path, env: Environment):
                 )
             )
 
-        if raw_config["timezone"] and raw_config["timezone"].strip():
-            tz = timezone(raw_config["timezone"])
-        else:
-            tz = env.timezone
-
-    return Config(timezone=tz, sources=sources)
+    return Config(sources=sources)
 
 
 # for debugging purposes
