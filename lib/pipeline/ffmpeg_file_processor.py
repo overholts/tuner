@@ -3,7 +3,7 @@ import subprocess
 from pathlib import Path
 
 from lib.entities import Source
-from lib.files.metadata_file_processor import MetadataFileProcessor
+from lib.pipeline.metadata_file_processor import MetadataFileProcessor
 
 logger = logging.getLogger("FFMpegFileProcessor")
 

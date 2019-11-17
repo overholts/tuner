@@ -131,7 +131,7 @@ RUN apk del .build-deps \
 ENV PYTHONPATH /application
 
 RUN mkdir /downloads \
-    && mkdir /processed \
+    && mkdir /pipelined \
     && mkdir /database \
     && mkdir /configuration
 

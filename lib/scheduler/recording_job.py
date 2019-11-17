@@ -5,7 +5,7 @@ import inflection
 
 from lib.audio.mp3_recorder import MP3Recorder
 from lib.entities import Source
-from lib.files.ffmpeg_file_processor import FFMpegFileProcessor
+from lib.pipeline.ffmpeg_file_processor import FFMpegFileProcessor
 from lib.scheduler.cron_job import CronJob
 
 logger = logging.getLogger("RecordingJob")

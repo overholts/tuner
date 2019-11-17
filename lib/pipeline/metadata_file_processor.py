@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Dict
 
 from lib.entities import Source
-from lib.files.file_processor import FileProcessor
+from lib.pipeline.file_processor import FileProcessor
 
 
 class MetadataFileProcessor(FileProcessor):

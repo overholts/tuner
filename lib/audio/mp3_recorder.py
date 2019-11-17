@@ -5,7 +5,7 @@ from pathlib import Path
 import requests
 
 from lib.audio.recorder import Recorder
-from lib.files import filename
+from lib.pipeline import filename
 
 extension = "mp3"
 
