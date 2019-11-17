@@ -23,6 +23,8 @@ class Environment:
             self.timezone = timezone(os.environ["TZ"])
 
         if not valid_env:
-            raise ValueError("Environment requirements not met! See error logs for details.")
+            raise ValueError(
+                "Environment requirements not met! See error logs for details."
+            )
 
         logger.debug("All validations passed!")
