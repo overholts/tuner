@@ -130,10 +130,12 @@ RUN apk del .build-deps \
 
 ENV PYTHONPATH /application
 
-RUN mkdir /downloads \
-    && mkdir /pipelined \
-    && mkdir /database \
-    && mkdir /configuration
+# TODO Add more formal user management to the container itself (e.g. linuxserver.io containers)
+RUN mkdir -m 777 /downloads \
+    && mkdir -m 777 /pipelined \
+    && mkdir -m 777 /output \
+    && mkdir -m 777 /database \
+    && mkdir -m 777 /configuration
 
 COPY lib /application/lib
 

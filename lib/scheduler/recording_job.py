@@ -1,10 +1,12 @@
 import logging
+from datetime import datetime
 from pathlib import Path
 
 import inflection
 
 from lib.audio.mp3_recorder import MP3Recorder
 from lib.entities import Source
+from lib.library.file_store import FileStore
 from lib.pipeline.ffmpeg_file_processor import FFMpegFileProcessor
 from lib.scheduler.cron_job import CronJob
 
@@ -26,12 +28,17 @@ class RecordingJob(CronJob):
 
         self._file_processor = FFMpegFileProcessor(definition, processed_dir)
 
+        self._file_store = FileStore(definition)
+
     def run(self):
         logger.info(f"Running recording job with id {self.id}")
+
+        air_date = datetime.now()
         downloaded_file = self._recorder.record()
 
-        self._file_processor.apply(downloaded_file)
-        # TODO store into media library
+        processed_file = self._file_processor.apply(downloaded_file)
+
+        self._file_store.put(processed_file, air_date)
 
     @staticmethod
     def _get_file_prefix(definition: Source):

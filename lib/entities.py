@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from datetime import timedelta, tzinfo
+from datetime import timedelta
+from pathlib import Path
 from typing import List
 
 
@@ -11,6 +12,7 @@ class Source:
     audio_format: str
     start_time_cron: str
     duration: timedelta
+    path_template: Path
 
 
 @dataclass

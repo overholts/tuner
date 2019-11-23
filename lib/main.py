@@ -65,6 +65,22 @@ def parse_args(argv):
     )
 
     parser.add_argument(
+        "-o",
+        "--output-dir",
+        metavar="output-dir",
+        type=Path,
+        required=False,
+        default=Path("/output"),
+        help=textwrap.dedent(
+            """\
+            Location to store media to. Mount this to a volume rooted at
+            the base directory of your media library. Path templates
+            specified in source config will be relative to this
+            directory in the container."""
+        ),
+    )
+
+    parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",

@@ -1,13 +1,10 @@
-import os
 import sys
 from datetime import timedelta
 from pathlib import Path
 
 import yaml
-from pytz import timezone
 
 from lib.entities import Config, Source
-from lib.environment import Environment
 
 
 def load_from_yaml(file: Path):
@@ -23,10 +20,23 @@ def load_from_yaml(file: Path):
                     audio_format=source["format"],
                     start_time_cron=source["start_time_cron"],
                     duration=timedelta(minutes=source["duration_minutes"]),
+                    path_template=__get_container_path_template(source),
                 )
             )
 
     return Config(sources=sources)
+
+
+def __get_container_path_template(source) -> Path:
+    if Path(source["path_template"]).is_absolute():
+        raise ValueError(
+            (
+                f"path_template for source {source['id']} ({source['name']}) must be relative! "
+                "It will be rooted at the path mounted to '/output'."
+            )
+        )
+
+    return Path("/output").joinpath(source["path_template"])
 
 
 # for debugging purposes
