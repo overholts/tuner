@@ -48,17 +48,19 @@ def parse_args(argv):
     )
 
     parser.add_argument(
-        "-o",
-        "--processed-dir",
-        metavar="processed-dir",
+        "-pd",
+        "--pipeline-dir",
+        metavar="pipeline-dir",
         type=Path,
         required=False,
-        default=Path("/processed"),
+        default=Path("/pipelined"),
         help=textwrap.dedent(
             """\
-            Location to stage post-processed output files in. Staging them
+            Location to stage post-processed media files in. Staging them
             ensures that modifications of output media library directories
-            are as transactional as possible."""
+            are as transactional as possible. Data is only stored here
+            transiently, so there is probably not normally a need to mount
+            this directory outside of the container."""
         ),
     )
 
@@ -113,9 +115,7 @@ def main(argv=None):
 
     # Create jobs for each source
     for source in config.sources:
-        job_manager.register(
-            RecordingJob(source, args.download_dir, args.processed_dir)
-        )
+        job_manager.register(RecordingJob(source, args.download_dir, args.pipeline_dir))
 
     # Begin execution of jobs
     job_manager.run()
