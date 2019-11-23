@@ -8,6 +8,7 @@ dependencies:
   - flake8
   - autopep8
   - apscheduler
+  - requests
   - sqlalchemy
   - inflection
   - black
