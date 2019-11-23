@@ -4,5 +4,7 @@ Tuner is a tool designed for home media servers to schedule recording of audio s
 
 ```bash
 docker build . -t tuner
-docker run -it -e "TZ=America/Los_Angeles" -v /path/to/repo/tuner/configuration/:/configuration tuner -c /configuration/example.yaml
+
+docker run -it --name tuner --user $(id -u):$(id -g) -e "TZ=America/Los_Angeles" -v /path/to/repo/tuner/configuration/:/configuration -v /tmp/:/output \
+  tuner -c /configuration/example.yaml -v
 ```
