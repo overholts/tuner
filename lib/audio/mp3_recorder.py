@@ -7,7 +7,7 @@ import requests
 from lib.audio.recorder import Recorder
 from lib.pipeline import filename
 
-extension = "mp3"
+EXTENSION = "mp3"
 
 logger = logging.getLogger("MP3Recorder")
 
@@ -26,7 +26,7 @@ class MP3Recorder(Recorder):
         end_time = datetime.now() + self._duration
 
         output_file = self._download_dir.joinpath(
-            filename.get_temp_filename(self._file_prefix, extension)
+            filename.get_temp_filename(self._file_prefix, EXTENSION)
         )
 
         stream_url = self._get_stream_url()
