@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Dict, Set
 
 # TODO Make this more portable, I assume it wouldn't work on Windows.
-TEMPLATE_PATTERN = re.compile("/{([^/}]+)}")
+TEMPLATE_PATTERN = re.compile("{([^/}]+)}")
 
 logger = logging.getLogger("ParameterizedPathResolver")
 
