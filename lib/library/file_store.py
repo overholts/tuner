@@ -22,7 +22,9 @@ class FileStore:
         destination = self._path_resolver.get_path(time)
 
         if not destination.suffix == self._definition.audio_format:
-            destination = destination.with_suffix("." + self._definition.audio_format)
+            destination = destination.with_suffix(
+                destination.suffix + "." + self._definition.audio_format
+            )
 
         logger.info(f"Storing recording to {destination}")
         copy(file, destination)
