@@ -39,6 +39,7 @@ services:
     environment:
       TZ: Etc/UTC
     image: benoverholts/tuner
+    network_mode: host
     user: <UID>:<GID>
     restart: unless-stopped
     volumes:

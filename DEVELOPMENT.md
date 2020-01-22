@@ -3,5 +3,5 @@
 ```bash
 docker container rm tuner
 docker build . -t tuner
-docker run -d --name tuner --user 993:998 -e "TZ=Etc/UTC" -v /path/to/repo/configuration/:/configuration -v /tmp:/output tuner -c /configuration/example.yaml -v
+docker run --name tuner --user 993:998 -e "TZ=Etc/UTC" -v /path/to/repo/configuration/:/configuration -v /tmp:/output tuner -c /configuration/example.yaml -v
 ```
