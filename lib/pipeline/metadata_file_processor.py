@@ -20,7 +20,7 @@ class MetadataFileProcessor(FileProcessor):
     def _get_metadata_tags(self) -> Dict:
         # TODO Make this configurable
         return {
-            "artist": self._definition.name,
+            "artist": self._definition.station,
             "album": "{} {}".format(self._definition.name, datetime.date.today().year),
             "title": "{} - {}".format(
                 self._definition.name, datetime.date.today().strftime("%B %d, %Y")

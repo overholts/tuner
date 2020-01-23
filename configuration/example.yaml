@@ -5,8 +5,9 @@ version: 1
 sources:
   - id: 1
     name: Test Source
-    url: http://streams.c895.org/live.m3u  # support public radio!
+    station: Test Station
+    url: http://streams.c895.org/live.m3u   # support public radio!
     format: mp3
-    start_time_cron: "*/2 * * * *"
+    start_time_cron: "*/2 * * * *"          # standard cron scheduling
     duration_minutes: 1
-    path_template: "example/{%H-%M}"   # supports strftime substitutions
+    path_template: "example/{%H-%M}"        # supports strftime substitutions

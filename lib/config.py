@@ -16,6 +16,7 @@ def load_from_yaml(file: Path):
                 Source(
                     id=source["id"],
                     name=source["name"],
+                    station=source["station"],
                     url=source["url"],
                     audio_format=source["format"],
                     start_time_cron=source["start_time_cron"],

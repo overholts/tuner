@@ -8,6 +8,7 @@ from typing import List
 class Source:
     id: int
     name: str
+    station: str
     url: str
     audio_format: str
     start_time_cron: str
