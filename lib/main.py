@@ -122,7 +122,7 @@ def main(argv=None):
     for arg in vars(args):
         logger.info(f"   {arg}:\t{getattr(args, arg)}")
 
-    env = Environment()
+    env = Environment(args)
 
     logger.debug(f"Loading config from {args.config}")
     config = load_from_yaml(args.config)
@@ -131,7 +131,9 @@ def main(argv=None):
 
     # Create jobs for each source
     for source in config.sources:
-        job_manager.register(RecordingJob(source, args.download_dir, args.pipeline_dir))
+        job_manager.register(
+            RecordingJob(source, args.download_dir, args.pipeline_dir, env)
+        )
 
     # Begin execution of jobs
     job_manager.run()

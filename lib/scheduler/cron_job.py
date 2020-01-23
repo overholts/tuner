@@ -4,6 +4,7 @@ from abc import abstractmethod
 from apscheduler.triggers.base import BaseTrigger
 from apscheduler.triggers.cron import CronTrigger
 
+from lib.environment import Environment
 from lib.scheduler.job import Job
 
 logger = logging.getLogger("CronJob")
@@ -15,8 +16,8 @@ class CronJob(Job):
     """
 
     @abstractmethod
-    def __init__(self, job_id: int, cron_expression: str):
-        super().__init__(job_id)
+    def __init__(self, job_id: int, cron_expression: str, env: Environment):
+        super().__init__(job_id, env)
         self.__cron_expression = cron_expression
 
     def get_trigger(self) -> BaseTrigger:

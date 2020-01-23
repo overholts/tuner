@@ -6,6 +6,7 @@ import inflection
 
 from lib.audio.mp3_recorder import MP3Recorder
 from lib.entities import Source
+from lib.environment import Environment
 from lib.library.file_store import FileStore
 from lib.pipeline.ffmpeg_file_processor import FFMpegFileProcessor
 from lib.scheduler.cron_job import CronJob
@@ -14,8 +15,14 @@ logger = logging.getLogger("RecordingJob")
 
 
 class RecordingJob(CronJob):
-    def __init__(self, definition: Source, download_dir: Path, processed_dir: Path):
-        super().__init__(definition.id, definition.start_time_cron)
+    def __init__(
+        self,
+        definition: Source,
+        download_dir: Path,
+        processed_dir: Path,
+        env: Environment,
+    ):
+        super().__init__(definition.id, definition.start_time_cron, env)
         self._duration = definition.duration
         self._url = definition.url
         self._download_dir = download_dir
@@ -39,6 +46,8 @@ class RecordingJob(CronJob):
         processed_file = self._file_processor.apply(downloaded_file)
 
         self._file_store.put(processed_file, air_date)
+
+        self._clean_intermediate_files([downloaded_file, processed_file])
 
     @staticmethod
     def _get_file_prefix(definition: Source):

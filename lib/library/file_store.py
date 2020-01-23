@@ -4,7 +4,7 @@ from pathlib import Path
 
 from lib.entities import Source
 from lib.library.datetime_path_resolver import DatetimePathResolver
-from lib.library.file_utils import copy
+from lib.util.file_utils import copy
 from lib.library.parameterized_path_resolver import ParameterizedPathResolver
 
 logger = logging.getLogger("FileStore")

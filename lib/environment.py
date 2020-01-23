@@ -3,11 +3,14 @@ import os
 
 from pytz import timezone
 
-logger = logging.getLogger("EnvironmentValidator")
+logger = logging.getLogger("Environment")
 
 
 class Environment:
-    def __init__(self):
+    def __init__(self, args):
+
+        self.debug = args.verbose
+
         valid_env = True
         if not ("TZ" in os.environ and os.environ["TZ"].strip()):
             logger.error(
@@ -27,4 +30,4 @@ class Environment:
                 "Environment requirements not met! See error logs for details."
             )
 
-        logger.debug("All validations passed!")
+        logger.debug("All environment validations passed!")
