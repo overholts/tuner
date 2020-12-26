@@ -33,9 +33,8 @@ class MetadataFileProcessor(FileProcessor):
         """
         Helper to compute the track position tag.
 
-        TODO support this properly - probably parsing the cron to get:
-          (occurrences thus far in ALBUM_PERIOD) / (total occurrences in ALBUM_PERIOD)
+        TODO Make this configurable
         :return:
         """
 
-        return "1/1"
+        return f"{datetime.date.today().isocalendar()[1]}/52"
